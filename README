@@ -1,0 +1,29 @@
+  ==================================================================
+  XML::SimpleObject
+  Copyright 2001 by Dan Brian.
+
+  This program is free software; you can redistribute it and/or modify
+  it under the same terms as Perl itself.
+  ==================================================================
+
+DESCRIPTION
+
+This is a small and simple package that takes the output of XML::Parser as 
+a tree, and gives simple methods for accessing the structure of an XML 
+document.
+
+REQUIREMENTS
+
+None, but it's useless without XML::Parser.
+
+INSTALLATION
+
+  perl Makefile.PL
+  make 
+  make install
+
+TODO
+
+- Add an array list to each object of the ordered children element names for 
+  sequential processing
+
