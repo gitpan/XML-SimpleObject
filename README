@@ -10,11 +10,11 @@ DESCRIPTION
 
 This is a small and simple package that takes the output of XML::Parser as 
 a tree, and gives simple methods for accessing the structure of an XML 
-document.
+document. It is very lightweight, but provides the simplest access to an XML document possible. It does not subclass XML::Parser; rather, it is meant to serve purely as an object struct for an outgoing tree.
 
 REQUIREMENTS
 
-None, but it's useless without XML::Parser.
+None, but it's useless without XML::Parser. Only tested with perl5.6.0 on Linux and FreeBSD.
 
 INSTALLATION
 
@@ -22,8 +22,5 @@ INSTALLATION
   make 
   make install
 
-TODO
-
-- Add an array list to each object of the ordered children element names for 
-  sequential processing
+Then look at ex.pl. That pretty much sums up the functionality.
 

@@ -3,3 +3,10 @@ Revision history for Perl extension XML::SimpleObject.
 0.1  Mon Feb  5 14:54:38 2001
 	- original version; created by h2xs 1.19
 
+0.2  Fri Feb  8 01:07:32 2001
+        - fixed documentation typos, thanks Michel
+	- children_names() willl return an array of child element names for a 
+          given element
+        - children() called without an argument returns an array of all 
+          children element objects (though not in any particular order)
+

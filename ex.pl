@@ -20,6 +20,7 @@ EOF
   my $parser = new XML::Parser (ErrorContext => 2, Style => "Tree");
   my $xmlobj = new XML::SimpleObject ($parser->parse($XML));
 
+{
   print "Files: \n";
   foreach my $element ($xmlobj->child("files")->children("file")) 
   {
@@ -30,4 +31,24 @@ EOF
     }
     print "    bytes: " . $element->child("bytes")->value . "\n";
   }
+}
+
+print "\n\n";
+
+{
+  my $filesobj = $xmlobj->child("files")->child("file");
+  foreach my $child ($filesobj->children) {
+    print "child: ", $child->name, ": ", $child->value, "\n";
+  }
+}
+
+print "\n\n";
+
+{
+  my $filesobj = $xmlobj->child("files");
+  foreach my $childname ($filesobj->children_names) {
+      print "$childname has children: ";
+      print join (", ", $filesobj->child($childname)->children_names), "\n"; 
+  }
+}
 
