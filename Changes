@@ -11,6 +11,14 @@ Revision history for Perl extension XML::SimpleObject.
           children element objects (though not in any particular order)
 
 0.3  Mon Apr  16 10:20:04 2001
-        - fixed children()
+        - fixed children() bugs
         - fixed name() accessor within 'foreach ($obj->children)' loops
+
+0.4
+        - changed element treatment to allow all characters (thanks to Pekka 
+          Ahmavuo)
+
+TODO:
+
+        - children() preserves order of elements
 

@@ -3,7 +3,7 @@ package XML::SimpleObject;
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
-$VERSION = '0.3';
+$VERSION = '0.4';
 
 sub attributes {
     my $self = shift;
@@ -71,6 +71,8 @@ sub children {
     else
     {
         my @children;
+        #foreach my $key ($self->{_CHILDREN})
+        #{
         foreach my $key (keys %{$self})
         {
             if (ref($self->{$key}) eq "ARRAY")
@@ -94,10 +96,10 @@ sub convert {
         }
         elsif ($thisdata eq "0")
         {
-            if (${$array}[$i+1] =~ /\w/)
-            {
+            #if (${$array}[$i+1] =~ /\w/)
+            #{
                 $self->{_VALUE} .= ${$array}[$i+1];
-            }
+            #}
         }
         elsif (ref(${$array}[$i+1]) eq "ARRAY")
         {
