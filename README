@@ -18,15 +18,14 @@ I originally wrote the module as an example of parsing without handlers.
 
 REQUIREMENTS
 
-None, but it's useless without either XML::LibXML or XML::Parser. 
+You need either XML::Parser (for XML::SimpleObject) or XML::LibXML (for 
+XML::SimpleObject::LibXML).
+
 Tested on Linux, FreeBSD, and Win32 under perl5.6.0 and perl5.6.1.
-Please note that the tests will not work unless XML::Parser (for 
-XML::SimpleObject) and XML::LibXML (for XML::SimpleObject::LibXML) 
-are installed, although you don't need both to use one of the 
-modules. But, you need one. :-)
 
 INSTALLATION
 
+  (cd LibXML/; if installing the LibXML version)
   perl Makefile.PL
   make 
   make install

@@ -30,4 +30,6 @@ Revision history for Perl extension XML::SimpleObject.
 	  than iterating the tree twice. See the separate perldoc for this
 	  module.
 
+0.51  Sat Jan 26 2002
+	- fixed Makefile.PL to include dependencies
 
