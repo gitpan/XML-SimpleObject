@@ -3,7 +3,7 @@ package XML::SimpleObject;
 use strict;
 use XML::Parser;
 
-our $VERSION = '0.52';
+our $VERSION = '0.53';
 
 sub attributes {
     my $self = shift;

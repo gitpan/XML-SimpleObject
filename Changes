@@ -39,3 +39,6 @@ Revision history for Perl extension XML::SimpleObject.
 	- fixed changes with libxml 1.53 to work with constant XML_TEXT_NODE
         - added XML::SimpleObject::Enhanced.pm (need to document)
 
+0.53  Tue Mar 6 2003
+	- bad dist fix
+

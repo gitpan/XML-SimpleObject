@@ -2,9 +2,9 @@ package XML::SimpleObject::Enhanced;
 
 use strict;
 use warnings;
-our $VERSION = '0.52';
+our $VERSION = '0.53';
 
-use XML::SimpleObject 0.52;
+use XML::SimpleObject 0.53;
 our @ISA = qw(XML::SimpleObject);
 
 my $shiftwidth = 2;
