@@ -3,30 +3,30 @@ package XML::SimpleObject;
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 
-$VERSION = '0.2';
+$VERSION = '0.3';
 
 sub attributes {
     my $self = shift;
     my $name = shift;
-    if ($self->{ATTRS}) {
-        return (%{$self->{ATTRS}});
+    if ($self->{_ATTRS}) {
+        return (%{$self->{_ATTRS}});
     }
 }
 
 sub attribute {
     my $self = shift;
     my $name = shift;
-    if ($self->{ATTRS}) {
-        return ${$self->{ATTRS}}{$name};
+    if ($self->{_ATTRS}) {
+        return ${$self->{_ATTRS}}{$name};
     }
 }
 
 sub value {
-    $_[0]->{VALUE};
+    $_[0]->{_VALUE};
 }
 
 sub name {
-    $_[0]->{NAME};
+    $_[0]->{_NAME};
 }
 
 sub child {
@@ -43,6 +43,7 @@ sub child {
             return (${$self->{$tag}}[0]);
         }
     }
+    return;
 }
 
 sub children_names {
@@ -89,18 +90,18 @@ sub convert {
     foreach my $thisdata (@{$array}) {
         if (ref($thisdata) eq "HASH")
         {
-            $self->{ATTRS} = $thisdata;
+            $self->{_ATTRS} = $thisdata;
         }
         elsif ($thisdata eq "0")
         {
             if (${$array}[$i+1] =~ /\w/)
             {
-                $self->{VALUE} .= ${$array}[$i+1];
+                $self->{_VALUE} .= ${$array}[$i+1];
             }
         }
         elsif (ref(${$array}[$i+1]) eq "ARRAY")
         {
-            $self->{NAME} = $thisdata;
+            #$self->{_NAME} = $thisdata;
             push @{$self->{$thisdata}}, new XML::SimpleObject (
                     ${$array}[$i+1], $thisdata);
         }
@@ -114,7 +115,7 @@ sub new {
   my $name  = shift;
   my $self = {};
   bless ($self,$class);
-  $self->{NAME} = $name;
+  $self->{_NAME} = $name;
   $self->convert($table);
   return $self;
 }
