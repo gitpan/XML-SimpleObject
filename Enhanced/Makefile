@@ -1,4 +1,4 @@
-# This Makefile is for the XML::SimpleObject::LibXML extension to perl.
+# This Makefile is for the XML::SimpleObject::Enhanced extension to perl.
 #
 # It was generated automatically by MakeMaker version
 # 6.03 (Revision: 1.63) from the contents of
@@ -10,8 +10,8 @@
 #
 #   MakeMaker Parameters:
 
-#     NAME => q[XML::SimpleObject::LibXML]
-#     VERSION_FROM => q[LibXML.pm]
+#     NAME => q[XML::SimpleObject::Enhanced]
+#     VERSION_FROM => q[Enhanced.pm]
 
 # --- MakeMaker post_initialize section:
 
@@ -43,12 +43,12 @@ FULL_AR = /usr/bin/ar
 
 # --- MakeMaker constants section:
 AR_STATIC_ARGS = cr
-NAME = XML::SimpleObject::LibXML
-DISTNAME = XML-SimpleObject-LibXML
-NAME_SYM = XML_SimpleObject_LibXML
-VERSION = 0.52
-VERSION_SYM = 0_52
-XS_VERSION = 0.52
+NAME = XML::SimpleObject::Enhanced
+DISTNAME = XML-SimpleObject-Enhanced
+NAME_SYM = XML_SimpleObject_Enhanced
+VERSION = 0.6
+VERSION_SYM = 0_6
+XS_VERSION = 0.6
 INST_ARCHLIB = blib/arch
 INST_SCRIPT = blib/script
 INST_BIN = blib/bin
@@ -103,11 +103,11 @@ MM_VERSION = 6.03
 # BASEEXT = Basename part of FULLEXT. May be just equal FULLEXT. (eg Oracle)
 # PARENT_NAME = NAME without BASEEXT and no trailing :: (eg Foo::Bar)
 # DLBASE  = Basename part of dynamic library. May be just equal BASEEXT.
-FULLEXT = XML/SimpleObject/LibXML
-BASEEXT = LibXML
+FULLEXT = XML/SimpleObject/Enhanced
+BASEEXT = Enhanced
 PARENT_NAME = XML::SimpleObject
 DLBASE = $(BASEEXT)
-VERSION_FROM = LibXML.pm
+VERSION_FROM = Enhanced.pm
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -118,7 +118,7 @@ C_FILES =
 O_FILES = 
 H_FILES = 
 MAN1PODS = 
-MAN3PODS = LibXML.pm
+MAN3PODS = 
 INST_MAN1DIR = blib/man1
 MAN1EXT = 1
 INSTALLMAN1DIR = /usr/local/share/man/man1
@@ -165,13 +165,10 @@ PERL_ARCHIVE =
 
 PERL_ARCHIVE_AFTER = 
 
-TO_INST_PM = LibXML.pm \
-	ex.pl
+TO_INST_PM = Enhanced.pm
 
-PM_TO_BLIB = LibXML.pm \
-	blib/lib/XML/SimpleObject/LibXML.pm \
-	ex.pl \
-	blib/lib/XML/SimpleObject/ex.pl
+PM_TO_BLIB = Enhanced.pm \
+	blib/lib/XML/SimpleObject/Enhanced.pm
 
 
 # --- MakeMaker tool_autosplit section:
@@ -327,16 +324,6 @@ $(INST_ARCHAUTODIR)/.exists :: /Library/Perl/darwin/CORE/perl.h
 
 	-@$(CHMOD) $(PERM_RWX) $(INST_ARCHAUTODIR)
 
-config :: $(INST_MAN3DIR)/.exists
-	@$(NOOP)
-
-
-$(INST_MAN3DIR)/.exists :: /Library/Perl/darwin/CORE/perl.h
-	@$(MKPATH) $(INST_MAN3DIR)
-	@$(EQUALIZE_TIMESTAMP) /Library/Perl/darwin/CORE/perl.h $(INST_MAN3DIR)/.exists
-
-	-@$(CHMOD) $(PERM_RWX) $(INST_MAN3DIR)
-
 help:
 	perldoc ExtUtils::MakeMaker
 
@@ -380,17 +367,10 @@ static :: Makefile $(INST_STATIC)
 
 
 # --- MakeMaker manifypods section:
-POD2MAN_EXE = /usr/local/bin/pod2man
-POD2MAN = $(PERL) -we '%m=@ARGV;for (keys %m){' \
--e 'next if -e $$m{$$_} && -M $$m{$$_} < -M $$_ && -M $$m{$$_} < -M "Makefile";' \
--e 'print "Manifying $$m{$$_}\n";' \
--e 'system(q[$(PERLRUN) $(POD2MAN_EXE) ].qq[$$_>$$m{$$_}])==0 or warn "Couldn\047t install $$m{$$_}\n";' \
--e 'chmod(oct($(PERM_RW)), $$m{$$_}) or warn "chmod $(PERM_RW) $$m{$$_}: $$!\n";}'
 
-manifypods : pure_all LibXML.pm
-	@$(POD2MAN) \
-	LibXML.pm \
-	$(INST_MAN3DIR)/XML::SimpleObject::LibXML.$(MAN3EXT)
+manifypods : pure_all
+	@$(NOOP)
+
 
 # --- MakeMaker processPL section:
 
@@ -418,7 +398,7 @@ clean ::
 realclean purge ::  clean
 	rm -rf $(INST_AUTODIR) $(INST_ARCHAUTODIR)
 	rm -rf $(DISTVNAME)
-	rm -f  blib/lib/XML/SimpleObject/LibXML.pm blib/lib/XML/SimpleObject/ex.pl
+	rm -f  blib/lib/XML/SimpleObject/Enhanced.pm
 	rm -rf Makefile Makefile.old
 
 
@@ -644,9 +624,9 @@ TESTDB_SW = -d
 testdb :: testdb_$(LINKTYPE)
 
 test :: $(TEST_TYPE)
+	@echo 'No tests defined for $(NAME) extension.'
 
 test_dynamic :: pure_all
-	PERL_DL_NONLAZY=1 $(FULLPERLRUN) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
 
 testdb_dynamic :: pure_all
 	PERL_DL_NONLAZY=1 $(FULLPERLRUN) $(TESTDB_SW) "-I$(INST_LIB)" "-I$(INST_ARCHLIB)" $(TEST_FILE)
@@ -660,7 +640,7 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd:
-	@$(PERL) -e "print qq{<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,52,0,0\">\n\t<TITLE>$(DISTNAME)</TITLE>\n\t<ABSTRACT></ABSTRACT>\n\t<AUTHOR></AUTHOR>\n}" > $(DISTNAME).ppd
+	@$(PERL) -e "print qq{<SOFTPKG NAME=\"$(DISTNAME)\" VERSION=\"0,6,0,0\">\n\t<TITLE>$(DISTNAME)</TITLE>\n\t<ABSTRACT></ABSTRACT>\n\t<AUTHOR></AUTHOR>\n}" > $(DISTNAME).ppd
 	@$(PERL) -e "print qq{\t<IMPLEMENTATION>\n}" >> $(DISTNAME).ppd
 	@$(PERL) -e "print qq{\t\t<OS NAME=\"$(OSNAME)\" />\n\t\t<ARCHITECTURE NAME=\"darwin\" />\n\t\t<CODEBASE HREF=\"\" />\n\t</IMPLEMENTATION>\n</SOFTPKG>\n}" >> $(DISTNAME).ppd
 
@@ -668,7 +648,7 @@ ppd:
 
 pm_to_blib: $(TO_INST_PM)
 	@$(PERLRUNINST) "-MExtUtils::Install" \
-	-e "pm_to_blib({qw{LibXML.pm blib/lib/XML/SimpleObject/LibXML.pm ex.pl blib/lib/XML/SimpleObject/ex.pl}},'$(INST_LIB)/auto','$(PM_FILTER)')"
+	-e "pm_to_blib({qw{Enhanced.pm blib/lib/XML/SimpleObject/Enhanced.pm}},'$(INST_LIB)/auto','$(PM_FILTER)')"
 	@$(TOUCH) $@
 
 # --- MakeMaker selfdocument section:

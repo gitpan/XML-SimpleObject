@@ -1,10 +1,9 @@
 package XML::SimpleObject;
 
 use strict;
-use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 use XML::Parser;
 
-$VERSION = '0.5';
+our $VERSION = '0.52';
 
 sub attributes {
     my $self = shift;
@@ -96,7 +95,8 @@ sub convert {
         if ($tag eq "0") {
             $self->{_VALUE} .= $content;
         } elsif (ref $content eq "ARRAY") {
-            push @{$self->{$tag}}, new XML::SimpleObject ($content, $tag);
+          my $class = ref $self;
+          push @{$self->{$tag}}, new $class ($content, $tag);
         }
     }
 }

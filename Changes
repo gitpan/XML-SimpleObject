@@ -33,3 +33,9 @@ Revision history for Perl extension XML::SimpleObject.
 0.51  Sat Jan 26 2002
 	- fixed Makefile.PL to include dependencies
 
+0.52  Tue Jan 21 2003
+	- applied patch to SimpleObject.pm to permit inheritance (thanks to 
+          Cliff Stanford)
+	- fixed changes with libxml 1.53 to work with constant XML_TEXT_NODE
+        - added XML::SimpleObject::Enhanced.pm (need to document)
+ 

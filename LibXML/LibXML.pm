@@ -1,10 +1,9 @@
 package XML::SimpleObject::LibXML;
 
 use strict;
-use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 use XML::LibXML;
 
-$VERSION = '0.5';
+our $VERSION = '0.52';
 
 sub attributes {
     my $self = shift;
@@ -57,7 +56,7 @@ sub children_names {
     my @elements;
     foreach my $node ($self->{_DOM}->getChildnodes)
     {
-        next if ($node->nodeType == XML_TEXT_NODE);
+        next if ($node->nodeType == 3);
         push @elements, $node->getName;
     }
     return @elements;
@@ -75,14 +74,14 @@ sub children {
         if ($tag) {
             my @nodelist;
             foreach my $node ($self->{_DOM}->getElementsByTagName($tag)) {
-                next if ($node->nodeType == XML_TEXT_NODE);
+                next if ($node->nodeType == 3);
                 push @nodelist, new XML::SimpleObject::LibXML ($node);
             }
             return @nodelist;
         } else {
             my @nodelist;
             foreach my $node ($self->{_DOM}->getChildnodes()) {
-                next if ($node->nodeType == XML_TEXT_NODE);
+                next if ($node->nodeType == 3);
                 push @nodelist, new XML::SimpleObject::LibXML ($node);
             }
             return @nodelist;
@@ -140,7 +139,7 @@ XML::SimpleObject::LibXML - Perl extension allowing a simple(r) object represent
   %attributes    = $filesobj->attributes;
   @children      = $filesobj->children;
   @some_children = $filesobj->children("some");
-  @chilren_names = $filesobj->children_names;
+  @children_names = $filesobj->children_names;
 
 =head1 DESCRIPTION
 

@@ -18,3 +18,31 @@ print "ok 1\n";
 # (correspondingly "not ok 13") depending on the success of chunk 13
 # of the test code):
 
+my $XML = <<END;
+  <files>
+    <file type="symlink">
+      <name>/etc/dosemu.conf</name>
+      <dest>dosemu.conf-drdos703.eval</dest>
+      <bytes>0</bytes>
+    </file>
+    <file>
+      <name>/etc/passwd</name>
+      <bytes>948</bytes>
+    </file>
+  </files>
+END
+
+my $parser = new XML::LibXML;
+my $xmlobj = new XML::SimpleObject::LibXML ($parser->parse_string($XML));
+
+print "Files: \n";
+foreach my $element ($xmlobj->child("files")->children("file"))
+{
+  print "  filename: " . $element->child("name")->value . "\n";
+  if ($element->attribute("type"))
+  {
+    print "    type: " . $element->attribute("type") . "\n";
+  }
+  print "    bytes: " . $element->child("bytes")->value . "\n";
+}
+
