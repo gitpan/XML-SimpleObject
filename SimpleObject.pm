@@ -2,8 +2,9 @@ package XML::SimpleObject;
 
 use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
+use XML::Parser;
 
-$VERSION = '0.4';
+$VERSION = '0.41';
 
 sub attributes {
     my $self = shift;
@@ -71,8 +72,6 @@ sub children {
     else
     {
         my @children;
-        #foreach my $key ($self->{_CHILDREN})
-        #{
         foreach my $key (keys %{$self})
         {
             if (ref($self->{$key}) eq "ARRAY")
@@ -88,38 +87,41 @@ sub convert {
     my $self = shift;
     my $array = shift;
     unless (ref($array) eq "ARRAY") { die "not an array: $array\n" }
-    my $i = 0;
-    foreach my $thisdata (@{$array}) {
-        if (ref($thisdata) eq "HASH")
-        {
-            $self->{_ATTRS} = $thisdata;
+
+    # first element will always be a hashref
+    if (ref $array->[0] eq "HASH") { $self->{_ATTRS} = shift @$array; }
+
+    while (defined (my $tag = shift @$array)) {
+        my $content = shift @$array;
+        if ($tag eq "0") {
+            $self->{_VALUE} .= $content;
+        } elsif (ref $content eq "ARRAY") {
+            push @{$self->{$tag}}, new XML::SimpleObject ($content, $tag);
         }
-        elsif ($thisdata eq "0")
-        {
-            #if (${$array}[$i+1] =~ /\w/)
-            #{
-                $self->{_VALUE} .= ${$array}[$i+1];
-            #}
-        }
-        elsif (ref(${$array}[$i+1]) eq "ARRAY")
-        {
-            #$self->{_NAME} = $thisdata;
-            push @{$self->{$thisdata}}, new XML::SimpleObject (
-                    ${$array}[$i+1], $thisdata);
-        }
-        $i++;
     }
 }
 
 sub new {
-  my $class = shift;
-  my $table = shift;
-  my $name  = shift;
-  my $self = {};
-  bless ($self,$class);
-  $self->{_NAME} = $name;
-  $self->convert($table);
-  return $self;
+    my $class = shift;
+    if (ref $_[0] eq "ARRAY") {
+        my $table = shift;
+        my $name  = shift;
+        my $self = {};
+        bless ($self,$class);
+        $self->{_NAME} = $name;
+        $self->convert($table);
+        return $self;
+    } else {
+        my %args = @_;
+        my $parser = new XML::Parser (ErrorContext => $args{ErrorContext},
+                                      Style        => 'Tree');
+        my $table = $parser->parse($args{XML});
+        my $self = {};
+        bless ($self,$class);
+        $self->{_NAME} = "";
+        $self->convert($table);
+        return $self;
+    }
 }
 
 
@@ -134,6 +136,12 @@ XML::SimpleObject - Perl extension allowing a simple object representation of a 
 
   use XML::SimpleObject;
 
+  # Construct with the key/value pairs as argument; this will create its 
+  # own XML::Parser object.
+  my $xmlobj = new XML::SimpleObject(XML => $XML, ErrorContext => 2);
+
+  # ... or construct with the parsed tree as the only argument, having to 
+  # create the XML::Parser object separately.
   my $parser = new XML::Parser (ErrorContext => 2, Style => "Tree");
   my $xmlobj = new XML::SimpleObject ($parser->parse($XML));
 
@@ -279,3 +287,4 @@ Dan Brian <dbrian@brians.org>
 perl(1), XML::Parser.
 
 =cut
+

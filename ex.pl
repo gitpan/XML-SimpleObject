@@ -17,8 +17,12 @@ my $XML = <<EOF;
 
 EOF
 
-  my $parser = new XML::Parser (ErrorContext => 2, Style => "Tree");
-  my $xmlobj = new XML::SimpleObject ($parser->parse($XML));
+my $xmlobj = new XML::SimpleObject(XML => $XML, ErrorContext => 2);
+
+#my $parser = new XML::Parser (ErrorContext => 2, Style => "Tree");
+#my $xmlobj = new XML::SimpleObject ($parser->parse($XML));
+
+print "\n";
 
 {
   print "Files: \n";
@@ -33,7 +37,7 @@ EOF
   }
 }
 
-print "\n\n";
+print "\n";
 
 {
   my $filesobj = $xmlobj->child("files")->child("file");
@@ -42,7 +46,7 @@ print "\n\n";
   }
 }
 
-print "\n\n";
+print "\n";
 
 {
   my $filesobj = $xmlobj->child("files");
@@ -51,4 +55,6 @@ print "\n\n";
       print join (", ", $filesobj->child($childname)->children_names), "\n"; 
   }
 }
+
+print "\n";
 

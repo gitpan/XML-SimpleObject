@@ -14,11 +14,18 @@ Revision history for Perl extension XML::SimpleObject.
         - fixed children() bugs
         - fixed name() accessor within 'foreach ($obj->children)' loops
 
-0.4
+0.4  Sat Jul 7 2001
         - changed element treatment to allow all characters (thanks to Pekka 
           Ahmavuo)
 
-TODO:
+0.41  Fri Aug 24 2001
+        - changed to allow parsing without separate XML::Parser object
+        - changed to handle empty elements properly; thanks to Thomas Ziehmer
+        - changed convert() implementation to allow zero values and some flow 
+          enhancements; thanks to Eric Kolve
 
-        - children() preserves order of elements
+
+TODO:
+        - make children() preserve order of elements
+        - port the interface to XML::LibXML
 
