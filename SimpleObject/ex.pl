@@ -1,5 +1,4 @@
-use XML::Parser; 
-use XML::SimpleObject;
+use XML::SimpleObject::LibXML;
 
 my $XML = <<EOF;
 
@@ -7,7 +6,7 @@ my $XML = <<EOF;
     <file type="symlink">
       <name>/etc/dosemu.conf</name>
       <dest>dosemu.conf-drdos703.eval</dest>
-      <bytes>20</bytes>
+      <bytes><hi>cool</hi>20</bytes>
     </file>
     <file>
       <name>/etc/passwd</name>
@@ -17,10 +16,11 @@ my $XML = <<EOF;
 
 EOF
 
-my $xmlobj = new XML::SimpleObject(XML => $XML, ErrorContext => 2);
+my $xmlobj = new XML::SimpleObject::LibXML(XML => $XML);
 
-#my $parser = new XML::Parser (ErrorContext => 2, Style => "Tree");
-#my $xmlobj = new XML::SimpleObject ($parser->parse($XML));
+# or:
+# my $parser = new XML::LibXML;
+# my $xmlobj = new XML::SimpleObject::LibXML ($parser->parse_string($XML));
 
 print "\n";
 

@@ -24,8 +24,10 @@ Revision history for Perl extension XML::SimpleObject.
         - changed convert() implementation to allow zero values and some flow 
           enhancements; thanks to Eric Kolve
 
+0.5  Wed Jan 23 2002
+	- added XML::SimpleObject::LibXML providing the same interface using 
+	  XML::LibXML; it's faster and uses the libxml DOM methods rather 
+	  than iterating the tree twice. See the separate perldoc for this
+	  module.
 
-TODO:
-        - make children() preserve order of elements
-        - port the interface to XML::LibXML
 

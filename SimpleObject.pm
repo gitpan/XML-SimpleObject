@@ -4,7 +4,7 @@ use strict;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK);
 use XML::Parser;
 
-$VERSION = '0.41';
+$VERSION = '0.5';
 
 sub attributes {
     my $self = shift;
@@ -158,7 +158,7 @@ XML::SimpleObject - Perl extension allowing a simple object representation of a 
 
 =head1 DESCRIPTION
 
-This is a short and simple class allowing simple object access to a parsed XML::Parser tree, with methods for fetching children and attributes in as clean a manner as possible. My apologies for further polluting the XML:: space; this is a small and quick module, with easy and compact usage.
+This is a short and simple class allowing simple object access to a parsed XML::Parser tree, with methods for fetching children and attributes in as clean a manner as possible. My apologies for further polluting the XML:: space; this is a small and quick module, with easy and compact usage. See XML::SimpleObject::LibXML for the same interface for XML::LibXML.
 
 =head1 USAGE
 
